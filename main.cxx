@@ -95,8 +95,13 @@ int TestPlanePoiseuille(int argc, const char * argv[])
         }
     }
 
+    // interval of pipe width accessible to disc centers is [R .. L_y - R]; divide that into `nlanes` lanes, and use the center of each lane as the `y` coordinate
+    auto lanewidth = (Ly - 2.*R) / nlanes;
+
     for (int n = 0; n < nlanes; n++)
-        printf("%.10lg %.10lg\n", R + (n * (arena.GetHeight() - 2.*R) / nlanes), sums[n] / nsamples[n]);
+    {
+        printf("%.10lg %.10lg\n", R + ((n + 0.5) * lanewidth), sums[n] / nsamples[n]);
+    }
 
     return 0;
 } //TestPlanePoiseuille

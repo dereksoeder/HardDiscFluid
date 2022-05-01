@@ -459,7 +459,7 @@ private:
     } ;*/
     typedef unsigned int BoundaryFlags;  // see also `#define`s at top
 
-    static constexpr const BoundaryFlags m_FlagsForBoundary[NumBoundaryPositions] = { LeftFlag, RightFlag, TopFlag, BottomFlag };
+    const BoundaryFlags m_FlagsForBoundary[NumBoundaryPositions] = { LeftFlag, RightFlag, TopFlag, BottomFlag };
 
     struct CollisionRecord
     {
