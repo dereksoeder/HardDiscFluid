@@ -132,7 +132,8 @@ int TestCylinder(int argc, const char * argv[])
     case  66:  Vx = 1.;     d = 120.;  Lx = 1000.;  Ly =  800.;  ndiscs = 315476;  xcyl =  400.;  break;
     case 106:  Vx = 1.;     d = 200.;  Lx = 1600.;  Ly = 1200.;  ndiscs = 566575;  xcyl =  460.;  break;  // Fig. 7
     default:
-        throw std::invalid_argument{"unsupported Reynolds number"};
+        fprintf(stderr, "TestCylinder: unsupported Reynolds number %d; currently 6, 11, 33, 66, and 106 are supported\n", re);
+        return 1;
     }
 
     constexpr double R = 1.5;
