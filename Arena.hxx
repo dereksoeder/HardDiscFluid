@@ -371,15 +371,19 @@ public:
 
                     if ((m_Inflow_Vx >= 1.E-6) && (m_Inflow_T > 0.))
                     {
-                        std::pair<double,double> vxvy;
+                        double newvx, newvy;
+
                         do
                         {
-                            vxvy = MaxwellBoltzmannVelocity(disc.M, m_Inflow_T);
-                        }
-                        while (std::get<0>(vxvy) <= 0.);
+                            auto vxvy = MaxwellBoltzmannVelocity(disc.M, m_Inflow_T);
 
-                        disc.vx = std::get<0>(vxvy);
-                        disc.vy = std::get<1>(vxvy);
+                            newvx = std::get<0>(vxvy) + m_Inflow_Vx;
+                            newvy = std::get<1>(vxvy);
+                        }
+                        while (newvx <= 0.);
+
+                        disc.vx = newvx;
+                        disc.vy = newvy;
 
                         for (int tries = 0; tries < 20; tries++)  // don't see this in Ishiwata et al., but if I don't do this then the initial rarefaction of the wake loops around
                         {
